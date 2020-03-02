@@ -1,0 +1,24 @@
+{
+  "name": "htmltagchecker",
+  "version": "1.0.0",
+  "description": "sean's tag checker for interview test",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PathToLife/htmlTagChecker.git"
+  },
+  "keywords": [
+    "tag",
+    "html",
+    "validation"
+  ],
+  "author": "Sean Zeng",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/PathToLife/htmlTagChecker/issues"
+  },
+  "homepage": "https://github.com/PathToLife/htmlTagChecker#readme"
+}
