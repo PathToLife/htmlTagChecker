@@ -1,6 +1,10 @@
+import {checkHTML} from "../src";
+
 test('correct simple tags', () => {
     const input = 'The following text<C><B>is centred and in boldface</B></C>';
     const output = 'Correctly tagged paragraph';
+
+    checkHTML(input);
 });
 
 test('correct ignore bad tags', () => {
