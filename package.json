@@ -1,7 +1,7 @@
 {
-  "name": "htmltagchecker",
+  "name": "@pathtolife/htmltagchecker",
   "version": "1.0.0",
-  "description": "sean's tag checker for interview test",
+  "description": "basic html tag checker",
   "main": "index.js",
   "scripts": {
     "test": "jest"
@@ -20,5 +20,9 @@
   "bugs": {
     "url": "https://github.com/PathToLife/htmlTagChecker/issues"
   },
-  "homepage": "https://github.com/PathToLife/htmlTagChecker#readme"
+  "homepage": "https://github.com/PathToLife/htmlTagChecker#readme",
+  "devDependencies": {
+    "jest": "^25.1.0",
+    "typescript": "^3.8.3"
+  }
 }
