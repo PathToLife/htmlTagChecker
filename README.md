@@ -1,6 +1,7 @@
 # HTML Tag Checker <>(^_^)</>
-
 Validates <> </> tags according to a problem brief
+
+[![Build Status](https://pathtolife.visualstudio.com/htmlTagChecker/_apis/build/status/PathToLife.htmlTagChecker?branchName=master)](https://pathtolife.visualstudio.com/htmlTagChecker/_build/latest?definitionId=9&branchName=master)
 
 ### Warning
 This package was created for the purposes of a interview,
