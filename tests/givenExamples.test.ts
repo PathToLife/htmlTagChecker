@@ -4,7 +4,7 @@ test('correct simple tags', () => {
     const input = 'The following text<C><B>is centred and in boldface</B></C>';
     const output = 'Correctly tagged paragraph';
 
-    checkHTML(input);
+    expect(checkHTML(input)).toMatch(output);
 });
 
 test('correct ignore bad tags', () => {

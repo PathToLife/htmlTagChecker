@@ -6,6 +6,7 @@ Validates <> </> tags according to a problem brief
 This package was created for the purposes of a interview,
 there exists much better validation tools on the npm package website already :)
 
+This tag checker won't validate tags with more than one character..
 ### Commands
 
 You can replace `npm` with `yarn`
