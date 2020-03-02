@@ -1,3 +1,5 @@
+import {StringBuffer} from "./StringBuffer";
+
 interface TagValidatorOptions {
     openSymbol: string,
     closeSymbol: string,
@@ -16,17 +18,13 @@ interface Tag {
 }
 
 // Buffer parser like system
-export class TagValidator {
+export class TagValidator extends StringBuffer {
 
     options: TagValidatorOptions;
     tagStack: string[] = [];
 
-    html: string; // Buffer context
-    i: number; // Buffer index
-
     constructor(html: string, _options?: Partial<TagValidatorOptions>) {
-        this.html = html;
-        this.i = 0;
+        super(html);
         this.options = DEFAULT_OPTIONS;
 
         if (_options)
@@ -34,7 +32,6 @@ export class TagValidator {
                 ...this.options,
                 ..._options
             }
-
     }
 
     // Only returns true is name is a single length string of upper case letters
@@ -46,52 +43,55 @@ export class TagValidator {
     private isNextATag = (): Tag | false => {
 
         // Check if Open Tag symbol
-        if (this.html[this.i] !== this.options.openSymbol) return false;
-        this.i += 1;
+        if (this.GetNextChar() !== this.options.openSymbol) return false;
 
         // Check is Tag is closing
         let isClosing = false;
-        if (this.html[this.i] === this.options.closingTagSymbol) {
+        if (this.PeekNextChar() === this.options.closingTagSymbol) {
             isClosing = true;
-            this.i += 1;
+            this.GetNextChar();
         }
 
-        // Check is we have a valid tag name
-        if (!this.isValidTagName(this.html[this.i])) return false;
-        const tagName = this.html[this.i];
-        this.i += 1;
+        // Get Tag Name
+        let tagName = this.GetNextChar();
+        if (!tagName || !this.isValidTagName(tagName)) return false;
+
 
         // Check is we have a closing tag;
-        if (this.html[this.i] !== this.options.closeSymbol) return false;
+        if (this.GetNextChar() !== this.options.closeSymbol) return false;
 
-        
+        return {
+            isClosing: isClosing,
+            name: tagName
+        }
     };
 
+    // Returns if a html string is valid or not in string format with reasons
+    public GetResultString = (): string => {
+        while (this.CanGetNextChar()) {
+            const tag = this.isNextATag();
+            if (!tag) continue;
 
-    private processTag = (): boolean => {
-        // check if is tag, then add or pop from queue
-        const tagName = this.isNextATag();
-        if (!tagName) return true;
+            if (tag.isClosing) {
+                const popped = this.tagStack.pop();
+                if (popped !== tag.name) {
+                    return `Expected ${popped ? `</${popped}>` : '#'} found </${tag.name}>`
+                }
+            } else {
+                this.tagStack.push(tag.name)
+            }
+        }
 
+        if (this.tagStack.length !== 0) {
+            const tagName = this.tagStack.pop();
+            return `Expected ${tagName ? `</${tagName}>` : '#'} found #`
+        }
 
+        return 'Correctly tagged paragraph';
     };
 
     // Returns if a html string is valid or not
     public IsValid = (): boolean => {
-
-        for (this.i; this.i < this.html.length; this.i++) {
-            const s = this.html[this.i];
-
-            if (s == this.options.openSymbol) {
-                const res = this.processTag();
-                if (!res) return false;
-            }
-        }
-
-        return this.tagStack.length === 0;
-    };
-
-    public GetResultString = (): string => {
-        return '';
+        return this.GetResultString() === 'Correctly tagged paragraph';
     };
 }
