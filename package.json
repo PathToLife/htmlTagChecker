@@ -1,0 +1,35 @@
+{
+  "name": "@pathtolife/htmltagchecker",
+  "version": "1.0.0",
+  "description": "basic html tag checker",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "example": "ts-node examples/usage.ts",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PathToLife/htmlTagChecker.git"
+  },
+  "keywords": [
+    "tag",
+    "html",
+    "validation"
+  ],
+  "author": "pathtolife",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/PathToLife/htmlTagChecker/issues"
+  },
+  "homepage": "https://github.com/PathToLife/htmlTagChecker#readme",
+  "devDependencies": {
+    "jest": "^25.1.0",
+    "ts-jest": "^25.2.1",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "@types/jest": "^25.1.3"
+  }
+}
